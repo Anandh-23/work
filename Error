@@ -1,0 +1,7 @@
+Type Exception Report
+
+Message org.apache.jasper.JasperException: jakarta.el.ELException: Failed to parse the expression [${obj[key] !== null ? obj[key] : '[null]'}]
+
+Description The server encountered an unexpected condition that prevented it from fulfilling the request.
+
+Exception
