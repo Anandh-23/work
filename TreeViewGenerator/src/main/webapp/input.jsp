@@ -132,7 +132,8 @@
     <button onclick="convertToTreeView()">Convert to Tree View</button>
     <input type="text" id="searchInput" placeholder="Search...">
     <button onclick="searchTree()">Search</button>
-
+	<button onclick="expandAll()">Expand All</button>
+	<button onclick="collapseAll()">Collapse All</button>
     <div id="treeView"></div>
 
     <script>
@@ -300,7 +301,9 @@
                         span.innerHTML = newHTML;
                         element.replaceChild(span, node);
                     }
-                } else if (node.nodeType === Node.ELEMENT_NODE) {
+                } else if (node.nodeType === Node.ELEMENT_NODE && !node.classList.contains('object-caret') 
+                           && !node.classList.contains('array-caret') && !node.classList.contains('index-caret')) {
+                    // Prevent highlighting within caret elements
                     highlightText(node, regExp);
                 }
             });
@@ -313,7 +316,9 @@
                     parent.classList.add('active');
                 }
                 const parentToggler = parent.previousElementSibling;
-                if (parentToggler) {
+                if (parentToggler && (parentToggler.classList.contains('object-caret') || 
+                    parentToggler.classList.contains('array-caret') || 
+                    parentToggler.classList.contains('index-caret'))) {
                     parentToggler.classList.add('object-caret-down');
                     parentToggler.classList.add('array-caret-down');
                     parentToggler.classList.add('index-caret-down');
@@ -321,8 +326,52 @@
                 parent = parent.parentElement;
             }
         }
+
+        
+        function expandAll() {
+            const allNested = document.querySelectorAll('.nested');
+            allNested.forEach(nested => {
+                nested.classList.add('active'); // Show all nested lists
+            });
+
+            const allObjectTogglers = document.querySelectorAll('.object-caret');
+            allObjectTogglers.forEach(toggler => {
+                toggler.classList.add('object-caret-down');
+            });
+
+            const allArrayTogglers = document.querySelectorAll('.array-caret');
+            allArrayTogglers.forEach(toggler => {
+                toggler.classList.add('array-caret-down');
+            });
+
+            const allIndexTogglers = document.querySelectorAll('.index-caret');
+            allIndexTogglers.forEach(toggler => {
+                toggler.classList.add('index-caret-down');
+            });
+        }
+
+        function collapseAll() {
+            const allNested = document.querySelectorAll('.nested');
+            allNested.forEach(nested => {
+                nested.classList.remove('active'); // Hide all nested lists
+            });
+
+            const allObjectTogglers = document.querySelectorAll('.object-caret-down');
+            allObjectTogglers.forEach(toggler => {
+                toggler.classList.remove('object-caret-down');
+            });
+
+            const allArrayTogglers = document.querySelectorAll('.array-caret-down');
+            allArrayTogglers.forEach(toggler => {
+                toggler.classList.remove('array-caret-down');
+            });
+
+            const allIndexTogglers = document.querySelectorAll('.index-caret-down');
+            allIndexTogglers.forEach(toggler => {
+                toggler.classList.remove('index-caret-down');
+            });
+        }
+        
     </script>
-
 </body>
-
 </html>
