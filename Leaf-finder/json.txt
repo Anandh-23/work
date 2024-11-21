@@ -1,0 +1,24 @@
+{
+    "id": 1,
+    "categoryName": "Electronics",
+    "products": [
+        {
+            "id": 101,
+            "productName": "Smartphone",
+            "productDescription": "Latest model with 5G support",
+            "variations": [
+                {"id": 1001, "variationName": "128GB", "price": 699.99, "stock": 50},
+                {"id": 1002, "variationName": "256GB", "price": 799.99, "stock": 30}
+            ]
+        },
+        {
+            "id": 102,
+            "productName": "Laptop",
+            "productDescription": "High-performance laptop for professionals",
+            "variations": [
+                {"id": 1003, "variationName": "16GB RAM", "price": 1199.99, "stock": 20},
+                {"id": 1004, "variationName": "32GB RAM", "price": 1399.99, "stock": 10}
+            ]
+        }
+    ]
+}
